@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Document Upload</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .upload-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .upload-container h1 {
+            margin-bottom: 20px;
+        }
+        .file-input {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+        .file-input input[type="file"] {
+            display: none;
+        }
+        .submit-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="upload-container">
+    <h1>Upload Signed Document</h1>
+    <form th:action="@{/upload}" method="post" enctype="multipart/form-data">
+        <div class="file-input" onclick="document.getElementById('file').click();">
+            <p>Click here or drag and drop a file</p>
+            <input type="file" id="file" name="file" accept=".pdf, .docx" required>
+        </div>
+        <button type="submit" class="submit-btn">Check Validity</button>
+    </form>
+</div>
+<script>
+    // JavaScript to allow drag-and-drop (optional enhancement)
+    const fileInput = document.querySelector('.file-input');
+    const fileInputField = document.getElementById('file');
+
+    fileInput.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        fileInput.style.borderColor = '#007bff';
+    });
+
+    fileInput.addEventListener('dragleave', () => {
+        fileInput.style.borderColor = '#ccc';
+    });
+
+    fileInput.addEventListener('drop', (e) => {
+        e.preventDefault();
+        fileInput.style.borderColor = '#ccc';
+        fileInputField.files = e.dataTransfer.files;
+    });
+</script>
+</body>
+</html>
