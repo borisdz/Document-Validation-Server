@@ -20,6 +20,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.cert.CertificateExpiredException;
+import java.security.cert.CertificateNotYetValidException;
 import java.security.cert.X509Certificate;
 import java.util.Collection;
 import java.util.List;
@@ -41,8 +43,12 @@ public class DocumentServiceImpl implements DocumentService {
             PdfSignature pdfSignature = signatureUtil.getSignature(name);
             PdfPKCS7 pkcs7Signature = signatureUtil.readSignatureData(name);
 
-            return pkcs7Signature.verifySignatureIntegrityAndAuthenticity();
-
+            try {
+                pkcs7Signature.getSigningCertificate().checkValidity();
+                return true;
+            }catch (CertificateExpiredException | CertificateNotYetValidException e){
+                return false;
+            }
         }
         return false;
     }
