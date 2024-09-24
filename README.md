@@ -55,7 +55,7 @@ keytool -importcert -keystore server-truststore.p12 -alias client-public -file c
 
 Следно треба да се овозможи mTLS енкрипција во апликацијата. Тоа го правиме во `application.properties` во `src/main/java/resources`. Содржината на тој фајл изгледа вака:
 
-![Untitled](Untitled.png)
+![Untitled](readme_media/Untitled.png)
 
 Објаснување по линии:
 
@@ -85,7 +85,7 @@ keytool -importcert -keystore server-truststore.p12 -alias client-public -file c
 
 За да го направам ова прво, ги додадов потребните dependencies во `pom.xml` :
 
-![image.png](image.png)
+![image.png](readme_media/image.png)
 
 Зависности за базата на податоци - користев `PostgreSQL`, `Spring JPA` и `Spring Boot Starter Mail` за да може да се испраќа елекронска пошта до корисниците.
 
