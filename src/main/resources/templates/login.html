@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<div class="container">
+    <form class="form-signin mt-xl-5" method="post" action="/login">
+        <h2>Sign in</h2>
+        <p>
+            <label for="userName" class="sr-only">Username</label>
+            <input type="text" id="userName" name=userName class="form-control" placeholder="Username" required="" autofocus="">
+        </p>
+        <p>
+            <label for="userPassword" class="sr-only">Password</label>
+            <input type="password" id="userPassword" name="userPassword" class="form-control" placeholder="Password" required="" autofocus="">
+        </p>
+
+        <div th:if="${hasError}">
+            <div th:text="${error}" class="text-danger"></div>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+    <button onclick="location.href='/register'" class="btn btn-block btn-light">Register here</button>
+
+    <button onclick="location.href='/home'">Home Page</button>
+</div>
+</body>
+</html>
